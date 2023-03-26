@@ -1,7 +1,8 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import { Formik, Form, Field, ErrorMessage, Textarea } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 function Post() {
 
@@ -17,36 +18,51 @@ function Post() {
         from: Yup.string().required()
     })
 
+    const onSubmit = (data) => {
+        try{
+            axios.post("http://localhost:3001/post", data ).then((response) => {
+                if(response.data){
+                    alert("Your Post has been posted");
+                }else{
+                    alert("Field to post your message");
+                }
+            });
+        }catch(e){
+            alert(e);
+        }
+    }
+
     return (
-        <div className="bg-[#0E071D] pt-[100px] relative text-white flex justify-center items-center">
+        <div className="bg-[#0E071D] pt-[100px] relative text-white flex justify-center items-center pb-8">
             <Navigation/>
-            <div className="container bg-[#121323] w-1/2">
+            <div className="container bg-[#121323] w-[400px]">
                 <div className="bg-[#282730] py-5 pl-5 uppercase font-poppins font-semibold rounded-t-lg">
                     <div>
                         <h2>post what you feel</h2>
                     </div>
                 </div>
 
-                <Formik initialValues={initialValues} validationSchema={validationSchema}>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                     <Form className="px-8 py-6 ">
                         <div className="pb-4">
-                            <label for="dear">Dear: </label>
+                            <label htmlFor="dear">Dear: </label>
                             <br/>
                             <Field 
                                 id="dear" 
                                 name="dear"
                                 placeholder="Erica"
                                 className="text-black outline-none border-none rounded font-poppins w-full pl-5 py-2"
-                                maxlength='20'
+                                maxLength={'20'}
                             />
                             <ErrorMessage name="dear" element={<span/>}/>
                             <br/>
                         </div>
 
                         <div className="pb-4">
-                            <label for="message">Message:</label>
+                            <label htmlFor="message">Message:</label>
                             <br/>
-                            <textarea
+                            <Field
+                                as="textarea"
                                 id="message"
                                 name="message"
                                 placeholder="I will always Love you"
@@ -56,20 +72,20 @@ function Post() {
                         </div>
 
                         <div className="pb-4">
-                            <label for="from">From: </label>
+                            <label htmlFor="from">From: </label>
                             <br/>
                             <Field 
                                 id="from" 
                                 name="from"
                                 placeholder="Buloyskie"
                                 className="text-black outline-none border-none rounded font-poppins w-full pl-5 py-2"
-                                maxlength='20'
+                                maxLength={'20'}
                             />
                             <ErrorMessage name="dear" element={<span/>}/>
                             <br/>
                         </div>
 
-                        <button class="bg-[#0F1CF3] hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-blue-700 rounded w-full">Post</button>
+                        <button type="submit" className="bg-[#0F1CF3] hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-blue-700 rounded w-full">Post</button>
                     </Form>
                 </Formik>
             </div>

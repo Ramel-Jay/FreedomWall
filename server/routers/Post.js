@@ -14,4 +14,10 @@ router.post("/post", async(req, res) => {
     }
 });
 
+//Get data
+router.get("/get", async(req, res) => {
+    const listOfPost = await Post.findAll();
+    res.json(listOfPost);
+});
+
 module.exports = router;
