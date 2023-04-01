@@ -28,9 +28,6 @@ function Navigation() {
                         <li className="md:ml-8 text-xl md:my-0 my-7">
                             <p className='text-white hover:text-gray-400 duration-500 cursor-pointer' onClick={() => navigate('/About')}>About</p>
                         </li>
-                        <li className="md:ml-8 text-xl md:my-0 my-7">
-                            <p className='text-white hover:text-gray-400 duration-500 cursor-pointer' onClick={() => navigate('/Contact')}>Contact</p>
-                        </li>
                     </ul>
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" value="" className="sr-only peer" />

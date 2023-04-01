@@ -33,9 +33,9 @@ function Post() {
     }
 
     return (
-        <div className="bg-[#0E071D] pt-[100px] relative text-white flex justify-center items-center pb-8">
+        <div className="bg-[#0E071D] pt-[250px] relative text-white flex justify-center items-center pb-[237px] h-full">
             <Navigation/>
-            <div className="container bg-[#121323] w-[400px]">
+            <div className="container bg-[#121323] w-[700px]">
                 <div className="bg-[#282730] py-5 pl-5 uppercase font-poppins font-semibold rounded-t-lg">
                     <div>
                         <h2>post what you feel</h2>

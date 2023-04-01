@@ -24,7 +24,7 @@ function Home() {
     const post  = listofPost;
 
     return (
-        <div className='pt-[100px] relative bg-[#0E071D] text-white '>
+        <div className='pt-[100px] relative bg-[#0E071D] text-white'>
             <Navigation/>
             <div className="text-center font-bold text-5xl uppercase font-poppins">
             <Typed
@@ -55,16 +55,16 @@ function Home() {
                 <hr/>
             </div>
 
-            <div className="flex gap-6 justify-center items-center">
+            <div className="columns-3 p-10">
                 {
-                    post.map((value, key) => {
+                    post?.map((value, key) => {
                         return(
-                            <div key={key}>
-                                <a href="#" className="block max-w-sm p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
+                            <div key={key} className="flex justify-center pb-6 w-[500px] break-inside-avoid-column">
+                                <div className="p-6 max-w-lg rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
                                     <h5 className="mb-2 text-1xl font-semibold text-black">To: {value.dear}</h5>
                                     <p className="font-normal text-black">{value.message}</p>
                                     <h5 className="font-semibold text-right text-black">From: {value.from}</h5>
-                                </a>
+                                </div>
                             </div>
                         )
                     })
