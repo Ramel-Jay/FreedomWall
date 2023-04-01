@@ -1,8 +1,28 @@
-import React from 'react'
+import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import Typed from "react-typed"
+import Typed from "react-typed";
+import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Home() {
+
+    const navigate = useNavigate();
+
+    const [ listofPost, setListOfPost ] = useState();
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/get").then((response) => {
+            if(response.data.error){
+                console.log(response.data.error);
+            }else {
+                setListOfPost(response.data);
+            }
+        });
+    }, []);
+
+    const post  = listofPost;
+
     return (
         <div className='pt-[100px] relative bg-[#0E071D] text-white '>
             <Navigation/>
@@ -26,7 +46,7 @@ function Home() {
             </div>
 
             <div className="pt-[60px] text-center ">
-            <button class="bg-[#0F1CF3] hover:bg-blue-700 text-white font-regular py-4 px-5 rounded">
+            <button type="button" onClick={() => navigate('/Post')} className="bg-[#0F1CF3] hover:bg-blue-700 text-white font-regular py-4 px-5 rounded">
                 Post a Message
             </button>
             </div>
@@ -36,23 +56,19 @@ function Home() {
             </div>
 
             <div className="flex gap-6 justify-center items-center">
-                <a href="#" className="block max-w-sm p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
-                    <h5 className="mb-2 text-1xl font-semibold text-black">To: Username</h5>
-                    <p className="font-normal text-black">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <h5 className="font-semibold text-right text-black">From: Username</h5>
-                </a>
-
-                <a href="#" className="block max-w-sm p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
-                    <h5 className="mb-2 text-1xl font-semibold text-black">To: Username</h5>
-                    <p className="font-normal text-black">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <h5 className="font-semibold text-right text-black">From: Username</h5>
-                </a>
-
-                <a href="#" className="block max-w-sm p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
-                    <h5 className="mb-2 text-1xl font-semibold text-black">To: Username</h5>
-                    <p className="font-normal text-black">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <h5 className="font-semibold text-right text-black">From: Username</h5>
-                </a>
+                {
+                    post.map((value, key) => {
+                        return(
+                            <div key={key}>
+                                <a href="#" className="block max-w-sm p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
+                                    <h5 className="mb-2 text-1xl font-semibold text-black">To: {value.dear}</h5>
+                                    <p className="font-normal text-black">{value.message}</p>
+                                    <h5 className="font-semibold text-right text-black">From: {value.from}</h5>
+                                </a>
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
     )
