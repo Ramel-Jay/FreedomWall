@@ -55,15 +55,21 @@ function Home() {
                 <hr/>
             </div>
 
-            <div className="columns-3 p-10">
+            <div className="columns-3">
                 {
                     post?.map((value, key) => {
                         return(
-                            <div key={key} className="flex justify-center pb-6 w-[500px] break-inside-avoid-column">
-                                <div className="p-6 max-w-lg rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c]">
-                                    <h5 className="mb-2 text-1xl font-semibold text-black">To: {value.dear}</h5>
-                                    <p className="font-normal text-black">{value.message}</p>
-                                    <h5 className="font-semibold text-right text-black">From: {value.from}</h5>
+                            <div key={key} className="flex justify-center pb-6 max-w-fit break-inside-avoid-column px-10">
+                                <div className="p-6 rounded-lg shadow bg-[#EEE861] hover:bg-[#e6de4c] w-50 font-georgia ">
+                                    <div>
+                                        <h3 className="mb-2 text-1xl font-semibold text-black">To: {value.dear}</h3>
+                                    </div>
+                                    <div className="h-40 p-4 overflow-y-scroll my-10">
+                                        <p className="font-normal text-black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{value.message}</p>
+                                    </div>
+                                    <div>
+                                        <h5 className="font-semibold text-right text-black">From: {value.from}</h5>
+                                    </div>
                                 </div>
                             </div>
                         )
